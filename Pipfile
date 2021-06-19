@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+sqlalchemy = "*"
+boto3 = "*"
+pyyaml = "*"
+fastapi = {extras = ["all"], version = "*"}
+
+[dev-packages]
+flake8 = "*"
+black = "*"
+awscli = "*"
+ipython = "*"
+jupyterlab = "*"
+ipykernel = "*"
+
+[requires]
+python_version = "3.9"
