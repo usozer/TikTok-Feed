@@ -2,12 +2,10 @@ import logging
 import json
 
 import yaml
-import pandas as pd
 import sqlalchemy
-from sqlalchemy.exc import ArgumentError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Float, TIMESTAMP
+from sqlalchemy import Column, Integer, String
 
 # Set up module logger
 logger = logging.getLogger(__name__)
@@ -16,7 +14,7 @@ Base = declarative_base()
 
 
 class TikTok(Base):
-    """Create a table for ingredients"""
+    """Create a table for links"""
 
     __tablename__ = "tiktoks"
 
@@ -43,8 +41,6 @@ def create_db(engine_string, engine=None):
         logger.info("Database created at %s.", engine)
     except sqlalchemy.exc.ArgumentError:
         logger.error("Invalid engine string provided")
-    # except sqlalchemy.exc.OperationalError:
-    #     logger.error("Connection timed out, please check VPN connection")
     except Exception as e:
         logger.error("Unknown error", e)
 
@@ -63,32 +59,36 @@ def delete_db(engine_string, engine=None):
         logger.info("Database deleted at %s.", engine)
     except sqlalchemy.exc.ArgumentError:
         logger.error("Invalid engine string provided")
-    except sqlalchemy.exc.OperationalError:
-        logger.error("Connection timed out, please check VPN connection")
     except Exception as e:
         logger.error("Unknown error", e)
 
 
 def initialize(args):
+    """Initialize database"""
     with open(args.config, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
+    # No config vars for initialize module at this time
     # config = config["initialize"]
 
     create_db(args.output)
 
     with open(args.input, "r") as f:
         records = json.loads(f.read())
+    
+    logger.debug("Received %i records", len(records))
 
     tiktoks = []
     for record in records:
         tiktoks.append(TikTok(shortlink=record[0], timestamp=record[1]))
 
     engine = sqlalchemy.create_engine(args.output)
-    Session = sessionmaker(bind=engine)
-    session = Session()
+    SessionInstance = sessionmaker(bind=engine)
+    session = SessionInstance()
 
+    logger.info("Adding %i links to db %s", len(tiktoks), args.output)
     session.add_all(tiktoks)
     session.commit()
+    logger.info("Successfully committed to db")
 
     session.close()
