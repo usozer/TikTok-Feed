@@ -1,5 +1,5 @@
 import logging
-import csv
+import json
 
 import yaml
 import pandas as pd
@@ -22,7 +22,7 @@ class TikTok(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     shortlink = Column(String(100), unique=False, nullable=False)
-    timestamp = Column(TIMESTAMP, unique=False, nullable=False )
+    timestamp = Column(Integer, unique=False, nullable=False)
 
     # String representation, displays primary key
     def __repr__(self):
@@ -73,16 +73,16 @@ def initialize(args):
     with open(args.config, 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     
-    config = config["initialize"]
+    #config = config["initialize"]
 
     create_db(args.output)
 
     with open(args.input, "r") as f:
-        records = f.read().splitlines()
+        records = json.loads(f.read())
     
+    tiktoks = []
     for record in records:
-        tiktoks = []
-        tiktoks.append(TikTok({"shortlink":record[0], "timestamp":int(record[1])}))
+        tiktoks.append(TikTok(shortlink=record[0], timestamp=record[1]))
 
     engine = sqlalchemy.create_engine(args.output)
     Session = sessionmaker(bind=engine)
