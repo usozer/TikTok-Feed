@@ -5,8 +5,6 @@ from pyppeteer import launch
 from pyppeteer.browser import Browser
 
 
-
-
 async def get_embed_html(link: str, browser: Browser):
 
     page = await browser.newPage()
