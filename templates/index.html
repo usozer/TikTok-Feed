@@ -9,7 +9,9 @@
           "{{ url_for('html_element') }}",
           (success = function (data) {
             console.log(data);
-            $(".main-content").html(data).after($.getScript("https://www.tiktok.com/embed.js"));
+            $(".main-content")
+              .html(data)
+              .after($.getScript("https://www.tiktok.com/embed.js"));
           })
         );
       });
@@ -17,8 +19,12 @@
   </head>
   <body>
     <h1>WenchFeed</h1>
-    <h2>Like BuzzFeed, but less sh*tty</h1>
-    <div class="main-content"></div>
-
+    <h2>Like BuzzFeed, but less sh*tty</h2>
+    <div class="header-banner"></div>
+    <div class="bottom">
+      <div class="mid-panel">
+        <div class="main-content"></div>
+      </div>
+    </div>
   </body>
 </html>
