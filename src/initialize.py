@@ -70,16 +70,16 @@ def delete_db(engine_string, engine=None):
 
 
 def initialize(args):
-    with open(args.config, 'r') as f:
+    with open(args.config, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
-    
-    #config = config["initialize"]
+
+    # config = config["initialize"]
 
     create_db(args.output)
 
     with open(args.input, "r") as f:
         records = json.loads(f.read())
-    
+
     tiktoks = []
     for record in records:
         tiktoks.append(TikTok(shortlink=record[0], timestamp=record[1]))
@@ -87,50 +87,8 @@ def initialize(args):
     engine = sqlalchemy.create_engine(args.output)
     Session = sessionmaker(bind=engine)
     session = Session()
-    
+
     session.add_all(tiktoks)
     session.commit()
 
     session.close()
-
-
-
-# class SessionManager:
-#     def __init__(self, app=None, engine_string=None):
-#         """
-#         Args:
-#             app: Flask - Flask app
-#             engine_string: str - Engine string
-#         """
-#         if app:
-#             # If app is given, then get db bound to Flask
-#             self.session = None
-#         elif engine_string:
-#             # If engine string is given, then create
-#             # new SQLAlchemy engine object
-#             try:
-#                 engine = sqlalchemy.create_engine(engine_string)
-#                 Session = sessionmaker(bind=engine)
-#                 self.session = Session()
-#             except sqlalchemy.exc.ArgumentError:
-#                 logger.error(
-#                     "Could not parse engine URL from %s", engine_string
-#                 )
-#             except sqlalchemy.exc.OperationalError:
-#                 logger.error(
-#                     "Timed out, check to see if DB configuration \
-#                     is passed as env variables"
-#                 )
-#         else:
-#             raise ValueError(
-#                 "Need either an engine string or an app to initialize"
-#             )
-
-#     def close(self):
-#         """Closes session
-#         Returns: None
-#         """
-#         self.session.close()
-
-#     def add_to_db(self, datapath, header=True):
-#         pass
