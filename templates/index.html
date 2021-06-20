@@ -1,92 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>WenchFeed</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(function () {
+        $.get(
+          "{{ url_for('html_element') }}",
+          (success = function (data) {
+            console.log(data);
+            $(".main-content").html(data).after($.getScript("https://www.tiktok.com/embed.js"));
+          })
+        );
+      });
+    </script>
   </head>
   <body>
-    <h1>My First Heading</h1>
-    <p>My first paragraph.</p>
-    <blockquote
-      class="tiktok-embed"
-      cite="https://www.tiktok.com/@sushi._.pp/video/6972526121736883461"
-      data-video-id="6972526121736883461"
-      style="max-width: 605px; min-width: 325px"
-    >
-      <section>
-        <a
-          target="_blank"
-          title="@sushi._.pp"
-          href="https://www.tiktok.com/@sushi._.pp"
-          >@sushi._.pp</a
-        >
-        <p>
-          <a
-            title="stitch"
-            target="_blank"
-            href="https://www.tiktok.com/tag/stitch"
-            >#stitch</a
-          >
-          with @ajhawkinsx
-          <a
-            title="indian"
-            target="_blank"
-            href="https://www.tiktok.com/tag/indian"
-            >#indian</a
-          >
-          <a
-            title="colonization"
-            target="_blank"
-            href="https://www.tiktok.com/tag/colonization"
-            >#colonization</a
-          >
-          <a
-            title="black"
-            target="_blank"
-            href="https://www.tiktok.com/tag/black"
-            >#black</a
-          >
-          <a title="poc" target="_blank" href="https://www.tiktok.com/tag/poc"
-            >#POC</a
-          >
-          <a
-            title="decolonize"
-            target="_blank"
-            href="https://www.tiktok.com/tag/decolonize"
-            >#decolonize</a
-          >
-          <a
-            title="indigenous"
-            target="_blank"
-            href="https://www.tiktok.com/tag/indigenous"
-            >#indigenous</a
-          >
-          <a
-            title="biracial"
-            target="_blank"
-            href="https://www.tiktok.com/tag/biracial"
-            >#biracial</a
-          >
-          <a
-            title="wasian"
-            target="_blank"
-            href="https://www.tiktok.com/tag/wasian"
-            >#wasian</a
-          >
-          <a
-            title="WhatWouldPopTartsDo"
-            target="_blank"
-            href="https://www.tiktok.com/tag/WhatWouldPopTartsDo"
-            >#WhatWouldPopTartsDo</a
-          >
-        </p>
-        <a
-          target="_blank"
-          title="♬ original sound - Arushi Panwar"
-          href="https://www.tiktok.com/music/original-sound-6972525970339187461"
-          >♬ original sound - Arushi Panwar</a
-        >
-      </section>
-    </blockquote>
-    <script async src="https://www.tiktok.com/embed.js"></script>
+    <h1>WenchFeed</h1>
+    <h2>Like BuzzFeed, but less sh*tty</h1>
+    <div class="main-content"></div>
+
   </body>
 </html>
