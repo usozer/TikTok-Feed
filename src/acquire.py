@@ -1,4 +1,5 @@
 import logging
+import json
 
 import sqlite3
 from sqlite3 import Cursor
@@ -39,8 +40,6 @@ def acquire(args):
 
     if args.output is not None:
         with open(args.output, "w") as f:
-            
-            for record in msglist:
-                f.write(str(record) + "\n")
+            f.write(json.dumps(msglist))
 
     con.close()
