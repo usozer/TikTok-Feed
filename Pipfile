@@ -10,6 +10,7 @@ sqlalchemy = "*"
 boto3 = "*"
 pyyaml = "*"
 fastapi = {extras = ["all"], version = "*"}
+pyppeteer = "*"
 
 [dev-packages]
 flake8 = "*"
