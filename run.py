@@ -9,7 +9,7 @@ from src.acquire import acquire
 from src.initialize import initialize
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Run components of the model source code")
+    parser = argparse.ArgumentParser(description="Run components of the source code")
     subparsers = parser.add_subparsers()
 
     # ACQUIRE subparser
