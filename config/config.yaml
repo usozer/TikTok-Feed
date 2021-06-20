@@ -1,2 +1,7 @@
 acquire:
   groupchat: "'tiktok wenches'"
+
+app:
+  static_folder: "/static"
+  db_path: "sqlite:///clean.db"
+  num_tiktoks: 15
