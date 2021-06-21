@@ -71,7 +71,7 @@ def initialize(args):
     # No config vars for initialize module at this time
     # config = config["initialize"]
 
-    create_db(args.output)
+    engine = create_db("sqlite:///" + args.output)
 
     with open(args.input, "r") as f:
         records = json.loads(f.read())
@@ -82,7 +82,6 @@ def initialize(args):
     for record in records:
         tiktoks.append(TikTok(shortlink=record[0], timestamp=record[1]))
 
-    engine = sqlalchemy.create_engine(args.output)
     SessionInstance = sessionmaker(bind=engine)
     session = SessionInstance()
 
