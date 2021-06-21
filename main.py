@@ -10,7 +10,8 @@ from src.embed import embed
 from src.session import SessionManager
 from src.initialize import TikTok
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("APP")
+logging.basicConfig(format='%(name)-12s %(levelname)-8s %(message)s', level=logging.INFO)
 
 with open("config/config.yaml", "r") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
@@ -65,5 +66,5 @@ async def post_link(request: Request):
     session.add_to_db(
         TikTok(shortlink=link["shortlink"], timestamp=link["timestamp"])
     )
-    
+
     return "success"
