@@ -20,14 +20,18 @@ async def get_embed_html(link: str, browser: Browser):
     """
     page = await browser.newPage()
 
-    logger.info("Feeding URL %s", link)
+    logger.debug("Feeding URL %s", link)
     init_response = await page.goto(link)
     videourl = init_response.request.url
-    logger.info("Obtained long URL %s", videourl)
+    logger.debug("Obtained long URL %s", videourl)
 
     # Sending request
     r = requests.get("https://www.tiktok.com/oembed?url=" + videourl)
-    logger.info("Obtained response from TikTok API: %i", r.status_code)
+    logger.info(
+        "Obtained response from TikTok API for link %s: %i",
+        link,
+        r.status_code,
+    )
 
     return r.json()["html"]
 
@@ -50,4 +54,5 @@ async def embed(links: List[str]):
         element = await get_embed_html(link, browser)
         html_elements.append(element)
 
+    await browser.close()
     return html_elements
