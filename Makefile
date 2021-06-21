@@ -17,6 +17,6 @@ data/app.db: data/initial.json config/config.yaml
 database: data/app.db
 
 app:
-	docker run -p 8000:8011 $(app_imagename)
+	docker run -p 8000:8000 $(app_imagename)
 
 .PHONY: image image_app database app
