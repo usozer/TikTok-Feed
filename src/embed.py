@@ -45,7 +45,8 @@ async def embed(links: List[str]):
     Returns:
         List[str]: List of HTML embed codes
     """
-    browser = await launch(executablePath='/usr/bin/google-chrome-stable', headless=True, args=['--no-sandbox'])
+    #browser = await launch(executablePath='/usr/bin/google-chrome-stable', headless=True, args=['--no-sandbox'])
+    browser = await launch(headless=True, args=['--no-sandbox'])
     logger.debug("Launching browser")
 
     html_elements = []

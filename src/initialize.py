@@ -39,6 +39,7 @@ def create_db(engine_string, engine=None):
             engine = sqlalchemy.create_engine(engine_string)
         Base.metadata.create_all(engine)
         logger.info("Database created at %s.", engine)
+        return engine
     except sqlalchemy.exc.ArgumentError:
         logger.error("Invalid engine string provided")
     except Exception as e:
@@ -82,6 +83,7 @@ def initialize(args):
     for record in records:
         tiktoks.append(TikTok(shortlink=record[0], timestamp=record[1]))
 
+    # engine = sqlalchemy.create_engine("sqlite:///" + args.output)
     SessionInstance = sessionmaker(bind=engine)
     session = SessionInstance()
 
