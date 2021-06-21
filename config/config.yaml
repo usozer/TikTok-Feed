@@ -3,5 +3,5 @@ acquire:
 
 app:
   static_folder: "/static"
-  db_path: "sqlite:///clean.db"
+  db_path: "sqlite:///data/app.db"
   num_tiktoks: 15
