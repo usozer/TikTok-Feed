@@ -1,0 +1,34 @@
+body {
+  background-color: black;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+div.mid-panel {
+  margin-left: 450px;
+  margin-right: 450px;
+}
+
+.main-content {
+  background-color: white;
+  display: block;
+  justify-content: center;
+  border-radius: 25px;
+}
+
+.tiktok-embed {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.final-words {
+  color: white;
+  font-size: small;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
